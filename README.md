@@ -2,7 +2,7 @@
 
 XEM is a simple web analytics server written in Python and Flask.
 
-"Xem" means "watch" in Vietnamese.
+"Xem" means "to see" or "to watch" in Vietnamese.
 
 ## Usage
 

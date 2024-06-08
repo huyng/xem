@@ -14,11 +14,10 @@ setup(name='xem',
       long_description_content_type='text/markdown',
       author='Huy Nguyen',
       author_email='121183+huyng@users.noreply.github.com',
-      packages=['xem'],
-      #   entry_points={ 'console_scripts': [
-      #           'xem = rxd',
-      #       ],
-      #   },
+      packages=['xem', "xem.templates"],
+      package_data={
+          'xem.templates': ['*.html']
+      },
       install_requires=["Flask", "gunicorn"],
       zip_safe=False,
       url="https://github.com/huyng/xem")

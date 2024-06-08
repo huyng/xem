@@ -1,5 +1,6 @@
 import json
 import time
+import pathlib
 from argparse import ArgumentParser
 from base64 import b64decode
 from flask import Flask, render_template, make_response, request
@@ -54,7 +55,12 @@ tracking_script = \
 
 
 # Flask App
-app = Flask(__name__)
+template_folder = pathlib.Path(__file__)\
+                         .expanduser()\
+                         .parent\
+                         .joinpath("templates")\
+                         .resolve()
+app = Flask(__name__, template_folder=template_folder)
 
 
 @app.route('/')

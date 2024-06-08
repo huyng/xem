@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 
 setup(name='xem',
-      version='0.0.1',
+      version='0.0.2',
       description=('A lightweight self-hosted web analytics '
                    'server written in Flask and python.'),
       long_description=long_description,

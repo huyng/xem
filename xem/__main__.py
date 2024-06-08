@@ -32,11 +32,11 @@ tracking_script = \
             const url = window.location.toString();
             const referrer = document.referrer;
             const xemURL = "%(utm_gif_url)s" + "?" +
-                           "url=" +
+                           "u=" +
                            encodeURIComponent(url) +
-                           "&property=" +
+                           "&p=" +
                            encodeURIComponent(property) +
-                           "&referrer=" +
+                           "&r=" +
                            encodeURIComponent(referrer);
             image = new Image();
             image.src = xemURL;
@@ -72,7 +72,7 @@ def home():
 def script():
     prop = request.args.get("property")
     root_url = request.url_root
-    utm_gif_url = root_url + "utm.gif"
+    utm_gif_url = root_url + "t.gif"
     if prop is None:
         return ""
 
@@ -90,7 +90,7 @@ def script():
     return response
 
 
-@app.route('/utm.gif')
+@app.route('/t.gif')
 def tracker():
     response = make_response(pixelGif)
     response.headers['Content-Type'] = 'image/gif'
@@ -102,10 +102,14 @@ def tracker():
 
     # begin tracking code
     visitor_arrival_time = time.time()
-    visitor_referrer = request.args.get("referrer", "")
-    visitor_property = request.args.get("property", "")
-    visitor_url = request.args.get("url")
-    visitor_ip = request.remote_addr
+    visitor_referrer = request.args.get("r", "")
+    visitor_property = request.args.get("p", "")
+    visitor_url = request.args.get("u")
+
+    if request.headers.getlist("X-Forwarded-For"):
+        visitor_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        visitor_ip = request.remote_addr
 
     # don't write logs if property is none
     if visitor_property == "":

@@ -72,7 +72,7 @@ def home():
 def script():
     prop = request.args.get("property")
     root_url = request.url_root
-    utm_gif_url = root_url + "t.gif"
+    utm_gif_url = root_url + "tk"
     if prop is None:
         return ""
 
@@ -90,7 +90,7 @@ def script():
     return response
 
 
-@app.route('/t.gif')
+@app.route('/tk')
 def tracker():
     response = make_response(pixelGif)
     response.headers['Content-Type'] = 'image/gif'

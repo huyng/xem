@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 
 setup(name='xem',
-      version='0.0.6',
+      version='0.0.7',
       description=('A lightweight self-hosted web analytics '
                    'server written in Flask and python.'),
       long_description=long_description,
@@ -18,7 +18,9 @@ setup(name='xem',
       package_data={
           'xem.templates': ['*.html']
       },
-      install_requires=["Flask", "gunicorn", "duckdb"],
+      install_requires=["Flask", "gunicorn",
+                        "duckdb", "pydantic",
+                        "datapad"],
       zip_safe=False,
       url="https://github.com/huyng/xem")
 

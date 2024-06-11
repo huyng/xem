@@ -97,6 +97,7 @@ def script():
         "siteId": prop
     }
     response = make_response(tracking_script % params)
+    response.headers['Content-Type'] = 'text/javascript'
     return response
 
 

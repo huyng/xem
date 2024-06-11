@@ -172,6 +172,6 @@ def validate_event_data(event_data: dict):
 # ===============
 
 app.route('/')(home)
-app.route('/test')(test)
 app.route('/xem.js')(script)
 app.route('/tk')(tracker)
+# app.route('/test')(test)

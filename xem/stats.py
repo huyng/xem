@@ -3,6 +3,7 @@ import datapad as dp
 from tabulate import tabulate
 from datetime import datetime, timedelta, timezone
 from argparse import ArgumentParser
+from urllib.parse import unquote
 
 if __name__ == "__main__":
     ap = ArgumentParser()
@@ -53,6 +54,10 @@ if __name__ == "__main__":
         GROUP BY pageUrl
         ORDER BY count(*) DESC
     """).fetchall()
+
+    rows = dp.Seq(rows)\
+        .map(lambda r: (unquote(r[0]), r[1]))\
+        .collect()
     print()
     print("Most Viewed Pages")
     print(tabulate(rows,

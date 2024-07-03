@@ -165,8 +165,8 @@ def validate_event_data(event_data: dict):
     etype = models.Event
     if event_data.get("name") == "PageView":
         etype = models.PageViewEvent
-    elif event_data.get("name", "").startswith("Custom-"):
-        etype = models.PageViewEvent
+    elif event_data.get("name", "").startswith("u-"):
+        etype = models.UserGeneratedEvent
     return etype.model_validate(event_data)
 
 

@@ -1,6 +1,7 @@
 import typing as t
-from pydantic import BaseModel, HttpUrl, field_validator, IPvAnyAddress, Field
 from datetime import datetime
+from pydantic import (BaseModel, HttpUrl, field_validator,
+                      IPvAnyAddress, Field, ValidationError)
 
 
 class Event(BaseModel):
@@ -18,6 +19,17 @@ class Event(BaseModel):
     @property
     def py_time(self):
         return datetime.strptime(self.time, "%Y-%m-%dT%H:%M:%SZ")
+
+
+class UserGeneratedEvent(Event):
+    # all fields not associated with
+    name: str = Field(max_length=32)
+
+    @field_validator('name')
+    @classmethod
+    def validate_name(cls, name: str):
+        if not name.startswith("u-"):
+            raise ValidationError
 
 
 class PageViewEvent(Event):

@@ -51,6 +51,7 @@ if __name__ == "__main__":
     rows = db.execute("""
         SELECT pageUrl, count(*)
         FROM events
+        WHERE name = 'PageView'
         GROUP BY pageUrl
         ORDER BY count(*) DESC
     """).fetchall()

@@ -23,11 +23,11 @@ tracking_script = \
             this.currentUrl = "";
         }
 
-        emit(event) {
+        emit(evt) {
 
             // add default data to event
-            const event = Object.assign({}, event);
-            event["siteId"] = this.siteId
+            let event = Object.assign({}, evt);
+            event["siteId"] = this.siteId;
 
             // encode data as base64 json string
             const payloadJSON = JSON.stringify(event);

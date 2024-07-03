@@ -24,6 +24,11 @@ tracking_script = \
         }
 
         emit(event) {
+
+            // add default data to event
+            const event = Object.assign({}, event);
+            event["siteId"] = this.siteId
+
             // encode data as base64 json string
             const payloadJSON = JSON.stringify(event);
             const payloadBase64 = btoa(payloadJSON);
@@ -44,7 +49,6 @@ tracking_script = \
             const referrer = document.referrer;
             const event = {
                 "name": "PageView",
-                "siteId": this.siteId,
                 "referrer": referrer,
                 "pageUrl": pageUrl,
                 "prevUrl": this.currentUrl
